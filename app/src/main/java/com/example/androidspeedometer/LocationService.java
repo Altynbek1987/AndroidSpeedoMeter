@@ -7,15 +7,12 @@ import android.location.Location;
 import android.os.Binder;
 import android.os.Bundle;
 import android.os.IBinder;
-
 import androidx.annotation.Nullable;
-
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
-
 import java.text.DecimalFormat;
 import java.util.concurrent.TimeUnit;
 
@@ -109,7 +106,7 @@ public class LocationService extends Service implements LocationListener,
     @SuppressLint("SetTextI18n")
     private void updateUI() {
         if (MainActivity.p == 0) {
-            distance = distance + (lStart.distanceTo(lEnd) / 1000.00);
+            distance = distance + (lStart.distanceTo(lEnd) / 10000.00);  //Сдесь было 1000 а я поменял на 10000
             MainActivity.endTime = System.currentTimeMillis();
             long diff = MainActivity.endTime - MainActivity.startTime;
             diff = TimeUnit.MILLISECONDS.toMinutes(diff);

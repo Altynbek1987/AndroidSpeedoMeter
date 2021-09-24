@@ -29,7 +29,6 @@ public class LocationService extends Service implements LocationListener,
     double speed;
 
     private final IBinder mBinder = new LocalBinder();
-
     @Nullable
     @Override
     public IBinder onBind(Intent intent) {
@@ -53,15 +52,15 @@ public class LocationService extends Service implements LocationListener,
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
-
         return super.onStartCommand(intent, flags, startId);
     }
 
+    @SuppressLint("MissingPermission")
     @Override
     public void onConnected(Bundle bundle) {
         try {
-            LocationServices.FusedLocationApi.requestLocationUpdates(
-                    mGoogleApiClient, mLocationRequest, this);
+            LocationServices.FusedLocationApi.requestLocationUpdates
+                    (mGoogleApiClient, mLocationRequest,this);
         } catch (SecurityException e) {
         }
     }
@@ -72,7 +71,6 @@ public class LocationService extends Service implements LocationListener,
     }
     @Override
     public void onConnectionSuspended(int i) {
-
     }
     @Override
     public void onLocationChanged(Location location) {
@@ -88,16 +86,13 @@ public class LocationService extends Service implements LocationListener,
         updateUI();
         //вычисляя скорость с помощью метода getSpeed, он возвращает скорость в м/с, поэтому мы конвертируем ее в км/ч
         speed = location.getSpeed() * 18 / 5;
-
     }
 
     @Override
     public void onConnectionFailed(ConnectionResult connectionResult) {
-
     }
 
     public class LocalBinder extends Binder {
-
         public LocationService getService() {
             return LocationService.this;
         }
@@ -106,7 +101,7 @@ public class LocationService extends Service implements LocationListener,
     @SuppressLint("SetTextI18n")
     private void updateUI() {
         if (MainActivity.p == 0) {
-            distance = distance + (lStart.distanceTo(lEnd) / 10000.00);  //Сдесь было 1000 а я поменял на 10000
+            distance = distance + (lStart.distanceTo(lEnd) / 1000.00);
             MainActivity.endTime = System.currentTimeMillis();
             long diff = MainActivity.endTime - MainActivity.startTime;
             diff = TimeUnit.MILLISECONDS.toMinutes(diff);

@@ -18,7 +18,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
-
     LocationService myService;
     static boolean status;
     LocationManager locationManager;
@@ -44,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     };
 
     void bindService() {
-        if (status == true)
+        if (status)
             return;
         Intent i = new Intent(getApplicationContext(), LocationService.class);
         bindService(i, sc, BIND_AUTO_CREATE);
@@ -53,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     void unbindService() {
-        if (status == false)
+        if (!status)
             return;
         Intent i = new Intent(getApplicationContext(), LocationService.class);
         unbindService(sc);
@@ -63,45 +62,38 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-
     }
-
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (status == true)
+        if (status)
             unbindService();
     }
 
     @Override
     public void onBackPressed() {
-        if (status == false)
+        if (!status)
             super.onBackPressed();
         else
             moveTaskToBack(true);
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         dist = (TextView) findViewById(R.id.distancetext);
         time = (TextView) findViewById(R.id.timetext);
         speed = (TextView) findViewById(R.id.speedtext);
-
         start = (Button) findViewById(R.id.start);
         pause = (Button) findViewById(R.id.pause);
         stop = (Button) findViewById(R.id.stop);
-
         image = (ImageView) findViewById(R.id.image);
 
         start.setOnClickListener(new View.OnClickListener() {
@@ -118,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
                 }
                 Toast.makeText(MainActivity.this, "GPS включен в вашем устройстве", Toast.LENGTH_SHORT).show();
 
-                if (status == false)
+                if (!status)
                     //Здесь Служба определения местоположения становится связанной, а GPS-спидометр становится активным.
                     bindService();
                 locate = new ProgressDialog(MainActivity.this);
@@ -130,8 +122,6 @@ public class MainActivity extends AppCompatActivity {
                 pause.setVisibility(View.VISIBLE);
                 pause.setText("Pause");
                 stop.setVisibility(View.VISIBLE);
-
-
             }
         });
 
@@ -141,7 +131,6 @@ public class MainActivity extends AppCompatActivity {
                 if (pause.getText().toString().equalsIgnoreCase("pause")) {
                     pause.setText("Resume");
                     p = 1;
-
                 } else if (pause.getText().toString().equalsIgnoreCase("Resume")) {
                     checkGps();
                     locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
@@ -150,7 +139,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                     pause.setText("Pause");
                     p = 0;
-
                 }
             }
         });
@@ -171,10 +159,7 @@ public class MainActivity extends AppCompatActivity {
     //Этот метод приводит к диалоговому окну предупреждения.
     void checkGps() {
         locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-
         if (!locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
-
-
             showGPSDisabledAlertToUser();
         }
     }

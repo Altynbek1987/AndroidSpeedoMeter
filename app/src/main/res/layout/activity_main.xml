@@ -2,8 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    android:background="@android:color/black"
+    android:background="#222"
     android:orientation="vertical">
 
     <ImageView
@@ -21,7 +20,7 @@
         android:layout_marginTop="100dp"
         android:gravity="center"
         android:singleLine="true"
-        android:text="Общее расстояние:"
+        android:text="@string/total_distance"
         android:textColor="@android:color/white"
         android:textSize="25sp"
         android:textStyle="bold" />
@@ -33,7 +32,7 @@
         android:layout_marginTop="150dp"
         android:gravity="center"
         android:singleLine="true"
-        android:text="Мгновенная скорость:"
+        android:text="@string/current_speed"
         android:textColor="@android:color/white"
         android:textSize="18sp" />
 
@@ -44,7 +43,7 @@
         android:layout_marginTop="190dp"
         android:gravity="center"
         android:singleLine="true"
-        android:text="Общее время:"
+        android:text="@string/total_time"
         android:textColor="@android:color/white"
         android:textSize="17sp" />
 
@@ -62,7 +61,7 @@
             android:layout_gravity="bottom"
             android:background="@android:color/white"
             android:paddingBottom="0dp"
-            android:text="Начать расчет" />
+            android:text="@string/start_calculation" />
 
         <Button
             android:id="@+id/pause"
@@ -71,7 +70,7 @@
             android:layout_gravity="left"
             android:layout_weight="1"
             android:background="@android:color/white"
-            android:text="Пауза"
+            android:text="@string/pause"
             android:visibility="gone" />
 
         <Button
@@ -82,7 +81,7 @@
             android:layout_marginLeft="2dp"
             android:layout_weight="1"
             android:background="@android:color/white"
-            android:text="Стоп"
+            android:text="@string/stop"
             android:visibility="gone" />
     </LinearLayout>
 
